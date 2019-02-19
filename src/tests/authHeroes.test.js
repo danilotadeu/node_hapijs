@@ -32,8 +32,8 @@ describe('Auth teste suite', function () {
             method: 'POST',
             url: '/login',
             payload: {
-                username: 'danilo',
-                password: 'danilo2910'
+                username: 'cris',
+                password: 'cris'
             }
         })
 
