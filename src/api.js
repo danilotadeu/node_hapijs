@@ -25,6 +25,7 @@ const Inert = require('inert')
 const HapiJwt = require('hapi-auth-jwt2')
 const UtilRoutes = require('./routes/utilRoutes')
 
+
 const JWT_SECRET = process.env.JWT_KEY
 
 const app = new Hapi.Server({
