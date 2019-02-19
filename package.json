@@ -9,7 +9,7 @@
     "test:watch": "mocha src/tests/*.js -w",
     "test:prod": "cross-env NODE_ENV=prod npm t",
     "prod": "cross-env NODE_ENV=prod node src/api.js",
-    "start": "cross-env NODE_ENV=prod pm2-runtime src/api.js"
+    "start": "cross-env NODE_ENV=prod pm2 start src/api.js"
   },
   "keywords": [],
   "author": "",
