@@ -9,8 +9,7 @@
     "test:watch": "mocha src/tests/*.js -w",
     "test:prod": "cross-env NODE_ENV=prod npm t",
     "prod": "cross-env NODE_ENV=prod node src/api.js",
-    "start": "cross-env NODE_ENV=prod pm2-runtime src/api.js",
-    "poststart": "pm2 start src/api.js"
+    "start": "cross-env NODE_ENV=prod pm2-runtime src/api.js"
   },
   "keywords": [],
   "author": "",
@@ -33,5 +32,8 @@
     "pm2": "^3.3.1",
     "sequelize": "^4.42.0",
     "vision": "^5.4.4"
+  },
+  "devDependencies": {
+    "nyc": "^13.3.0"
   }
 }
