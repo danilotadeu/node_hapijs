@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npm i -g pm2",
-    "postinstall": "npm run test:prod ",
+    "postinstall": "cross-env NODE_ENV=prod npm t",
     "test": "nyc --reporter=html mocha --timeout 10000 --exit src/tests/*.js",
     "test:watch": "mocha src/tests/*.js -w",
     "test:prod": "cross-env NODE_ENV=prod npm t",
