@@ -15,6 +15,7 @@ const Hapi = require('hapi')
 const Context = require('./db/strategies/base/contextStrategy')
 const MongoDb = require('./db/strategies/mongodb/mongodb')
 const HeroiSchema = require('./db/strategies/mongodb/schemas/heroisSchema')
+const AlunoSchema = require('./db/strategies/mongodb/schemas/alunosSchema')
 const HeroRoute = require('./routes/heroRoutes')
 const AuthRoute = require('./routes/authRoutes')
 const Postgres = require('./db/strategies/postgres/postgres')
@@ -24,6 +25,7 @@ const Vision = require('vision')
 const Inert = require('inert')
 const HapiJwt = require('hapi-auth-jwt2')
 const UtilRoutes = require('./routes/utilRoutes')
+const AlunosRoutes = require('./routes/alunoRoutes')
 
 
 const JWT_SECRET = process.env.JWT_KEY
@@ -37,9 +39,15 @@ function mapRoutes(instance, methods) {
 }
 
 async function main() {
+    /**
+     * Schemas MongoDB
+    */
     const connection = MongoDb.connect()
     const context = new Context(new MongoDb(connection,HeroiSchema))
-
+    const contextAluno = new Context(new MongoDb(connection, AlunoSchema))
+    /**
+     * Schemas Postgres
+    */
     const connectionPostgres = await Postgres.connect()
     const model = await Postgres.defineModel(connectionPostgres, UsuarioSchema)
     const contextPostgres = new Context(new Postgres(connectionPostgres, model))
@@ -87,6 +95,7 @@ async function main() {
         ...mapRoutes(new HeroRoute(context), HeroRoute.methods()),
         ...mapRoutes(new AuthRoute(JWT_SECRET,contextPostgres), AuthRoute.methods()),
         ...mapRoutes(new UtilRoutes(), UtilRoutes.methods()),
+        ...mapRoutes(new AlunosRoutes(contextAluno), AlunosRoutes.methods())
     ])
 
     await app.start()
